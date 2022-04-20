@@ -57,7 +57,7 @@ const Contacts = () => {
               <TableCell textAlign="center" onClick={()=>DeleteUser(item.id)}>
                 <DeleteIcon/>
               </TableCell> 
-              <TableCell textAlign="center" onClick={()=>{}}>
+              <TableCell textAlign="center" onClick={()=>EditIcon}>
                 <EditIcon/>
                 </TableCell> 
 
