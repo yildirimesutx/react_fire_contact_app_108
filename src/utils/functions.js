@@ -5,7 +5,7 @@
 import firebase from "./firebase"
 import { useEffect, useState } from "react";
 
-import { getDatabase, set, push, ref, onValue } from "firebase/database";
+import { getDatabase, set, push, ref, onValue, remove } from "firebase/database";
 
 // bilgi ekleme
 
@@ -34,11 +34,11 @@ export const AddUser=(info)=>{
 // bilgi çağırma
   
 export const useFetch =()=>{
-    const [isLoading, setIsLoadig] =useState()
+    const [isLoading, setIsLoading] =useState()
     const [contactList, setContactList] = useState()
 
     useEffect(()=>{
-        setIsLoadig(true)
+        setIsLoading(true)
 
         const db = getDatabase();
         const userRef = ref(db, "mycontact");
@@ -52,12 +52,22 @@ export const useFetch =()=>{
             }
 
             // data.map((e, id)=>(
-            //     mycontactArray
+            //     e[id]
             // ))
 
            setContactList(mycontactArray);
            setIsLoading(false)
         })
     },[])
-    return {isLoading, contacList}
+    return {isLoading, contactList}
+}
+
+
+// veri silme
+
+export const DeleteUser = (id)=>{
+    const db = getDatabase();
+    const userRef = ref(db, "mycontact");
+
+    remove(ref(db, "mycontact/"+id))
 }
