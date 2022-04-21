@@ -15,7 +15,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { useFetch, DeleteUser } from "../../utils/functions";
 
 
-const Contacts = () => {
+const Contacts = ({editHandler}) => {
   const {isLoading, contactList} = useFetch()
  
   return (
@@ -57,22 +57,20 @@ const Contacts = () => {
               <TableCell textAlign="center" onClick={()=>DeleteUser(item.id)}>
                 <DeleteIcon/>
               </TableCell> 
-              <TableCell textAlign="center" onClick={()=>EditIcon}>
+              <TableCell textAlign="center"
+              onClick={()=>editHandler(
+                item.id,
+                item.username,
+                item.phoneNumber,
+                item.gender
+              )} >
                 <EditIcon/>
                 </TableCell> 
 
               </TableRow>
-
-
-
             ))
-
-
             )}
 
-         
-            
-          
           { /* Bilgiler olmadığı,boş olduğu  durumda veri bulunamadı mesajı*/}
          
             <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>            

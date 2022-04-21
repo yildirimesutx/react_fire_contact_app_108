@@ -5,7 +5,8 @@
 import firebase from "./firebase"
 import { useEffect, useState } from "react";
 
-import { getDatabase, set, push, ref, onValue, remove } from "firebase/database";
+import { getDatabase, set, push, ref, onValue, remove, update } from "firebase/database";
+import Toastify from "./toast";
 
 // bilgi ekleme
 
@@ -70,4 +71,16 @@ export const DeleteUser = (id)=>{
     const userRef = ref(db, "mycontact");
 
     remove(ref(db, "mycontact/"+id))
+    Toastify("Kullanıcı Bilgisi Silindi")
+}
+
+
+// veri değiştirme-güncelleme
+
+export const EditUser = (info)=>{
+    const db = getDatabase();
+
+    const updates ={}
+    updates["mycontact/"+info.id]=info;
+    return update(ref(db), updates)
 }
